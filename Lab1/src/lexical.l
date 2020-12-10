@@ -9,7 +9,7 @@ DIGIT      [0-9]
 INTEGER    0|([1-9]({DIGIT}*))
 HEX        0[xX]([0-9a-fA-F]+)
 OCTAL      0([0-7]+)
-FLOAT      ({DIGIT}*)\.({DIGIT}+)
+FLOAT      ({DIGIT}+)\.({DIGIT}+)
 FLOAT_E    ((\.{DIGIT}+)|({DIGIT}+\.{DIGIT}*))([eE][+-]?{DIGIT}+)
 ID         ({LETTER}|_)({LETTER}|{DIGIT}|_)*
 RELOP      ">"|"<"|">="|"<="|"=="|"!="
