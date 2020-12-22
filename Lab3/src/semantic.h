@@ -49,13 +49,19 @@ struct FieldList_
     FieldList *next;
 };
 
+// 创建新的符号，以便加入符号表
 Type* newType(Kind kind,int num, ...);
+
+// 检查类型函数
+// *cmp()，在相同时返回0
+// check*()，在相同时返回1
 int typecmp(Type* first, Type* second);
 int strtcmp(Structure *first, Structure *second);
 int checkLeftExp(Node *leftNode);
 int checkParams(FieldList* first, FieldList* second);
-void analyze_tree();
 
+// 与TreeNode有关的操作
+void analyze_tree();
 void Program(Node *root);
 void ExtDefList(Node *n);
 void ExtDef(Node *n);
@@ -76,7 +82,7 @@ FieldList *Dec(Node *n, Type *specifier, int inStruct);
 Type *Exp(Node *n);
 FieldList *Args(Node *n);
 
-
+// 报错
 void print_error(ErrorType error, int lineno);
 
 

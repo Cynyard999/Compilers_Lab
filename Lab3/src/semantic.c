@@ -8,22 +8,19 @@ Type *newType(Kind kind, int num, ...)
     Type *newType = (Type *)malloc(sizeof(Type));
     newType->kind = kind;
     va_list valist;
+    va_start(valist, num);
     switch (kind)
     {
     case BASIC:
-        va_start(valist, num);
         newType->u.basic = va_arg(valist, BasicType);
         break;
     case ARRAY:
-        va_start(valist, num);
         newType->u.array = va_arg(valist, Array *);
         break;
     case STRUCTURE:
-        va_start(valist, num);
         newType->u.structure = va_arg(valist, Structure *);
         break;
     case FUNCTION:
-        va_start(valist, num);
         newType->u.function = va_arg(valist, Function *);
         break;
     }
@@ -136,7 +133,6 @@ void analyze_tree()
         return;
     }
     initHashTable();
-    initHashTable_struct();
     Program(root);
 }
 
@@ -397,10 +393,11 @@ void CompSt(Node *node, Type *returnType)
     {
         return;
     }
-    // LC DefList StmtList RC || LC DefList RC
+    // LC DefList *
     if (strcmp(node->firstChild->nextSibling->name, "DefList") == 0)
     {
         DefList(node->firstChild->nextSibling, 0);
+        // LC DefList StmtList RC
         if (strcmp(node->firstChild->nextSibling->nextSibling->name, "StmtList") == 0)
         {
             StmtList(node->firstChild->nextSibling->nextSibling, returnType);
